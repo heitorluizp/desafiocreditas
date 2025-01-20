@@ -17,7 +17,7 @@ public class TaxaFinder {
         this.appConfig = appConfig;
     }
 
-    public  BigDecimal findTaxa(String atributo, int valor) throws IOException {
+    public BigDecimal findTaxa(String atributo, int valor) throws IOException {
 
         String jsonString = appConfig.getRegrasTaxaIdade();
         ObjectMapper mapper = new ObjectMapper();
