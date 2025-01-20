@@ -33,7 +33,6 @@ class SimulacaoControllerTest {
 
     @Test
     void testSimularEmprestimo() {
-        // Arrange
         SimulacaoRequestDTO requestDTO = new SimulacaoRequestDTO();
         requestDTO.setValorEmprestimo(new BigDecimal("1500.00"));
         requestDTO.setPrazoMeses(24);
@@ -47,10 +46,8 @@ class SimulacaoControllerTest {
         when(simulacaoService.calcularSimulacao(any(BigDecimal.class), any(Integer.class), any(String.class)))
                 .thenReturn(simulacao);
 
-        // Act
         ResponseEntity<SimulacaoResponseDTO> response = simulacaoController.simularEmprestimo(requestDTO);
 
-        // Assert
         assertEquals(200, response.getStatusCodeValue());
         assertEquals(new BigDecimal("1620.00"), response.getBody().getValorTotal());
         assertEquals(new BigDecimal("67.50"), response.getBody().getValorParcelas());

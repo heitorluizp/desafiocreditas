@@ -36,7 +36,8 @@ public class SimulacaoController {
                             schema = @Schema(implementation = SimulacaoResponseDTO.class))),
             @ApiResponse(responseCode = "400", description = "Erro de validação nos parâmetros",
                     content = @Content)
-    })    @PostMapping("/simulacao")
+    })
+    @PostMapping()
     public ResponseEntity<SimulacaoResponseDTO> simularEmprestimo(
             @RequestBody SimulacaoRequestDTO simulacaoRequestDTO) {
         Simulacao simulacao = simulacaoService.calcularSimulacao(

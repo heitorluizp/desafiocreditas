@@ -38,7 +38,6 @@ class SimulacaoServiceImplTest {
     @Test
     @SneakyThrows
     void testCalcularSimulacao() {
-        // Arrange
         BigDecimal valorEmprestimo = new BigDecimal("1500.00");
         int prazoMeses = 24;
         String dataNascimento = "1990-01-01";
@@ -47,10 +46,8 @@ class SimulacaoServiceImplTest {
 
         when(taxaFinder.findTaxa(eq("idade"), anyInt())).thenReturn(taxaJuros);
 
-        // Act
         Simulacao simulacao = simulacaoService.calcularSimulacao(valorEmprestimo, prazoMeses, dataNascimento);
 
-        // Assert
         assertEquals(valorEmprestimo, simulacao.getValorEmprestimo());
         assertEquals(prazoMeses, simulacao.getPrazoMeses());
         assertEquals(idade, simulacao.getIdade());
@@ -62,7 +59,6 @@ class SimulacaoServiceImplTest {
     @Test
     @SneakyThrows
     void testCalcularSimulacaoWithDefaultTaxaJuros() {
-        // Arrange
         BigDecimal valorEmprestimo = new BigDecimal("1500.00");
         int prazoMeses = 24;
         String dataNascimento = "1990-01-01";
@@ -71,10 +67,8 @@ class SimulacaoServiceImplTest {
         when(taxaFinder.findTaxa(eq("idade"), anyInt())).thenThrow(new RuntimeException("Erro ao buscar taxa de juros"));
         when(appConfig.getTaxaPadraoJuros()).thenReturn(defaultTaxaJuros);
 
-        // Act
         Simulacao simulacao = simulacaoService.calcularSimulacao(valorEmprestimo, prazoMeses, dataNascimento);
 
-        // Assert
         assertEquals(new BigDecimal("64.4718"), simulacao.getValorParcelas());
         assertEquals(new BigDecimal("1547.3232"), simulacao.getValorTotal());
         assertEquals(new BigDecimal("47.3232"), simulacao.getTotalJuros());
@@ -82,12 +76,10 @@ class SimulacaoServiceImplTest {
 
     @Test
     void testCalcularSimulacaoWithInvalidDataNascimento() {
-        // Arrange
         BigDecimal valorEmprestimo = new BigDecimal("1500.00");
         int prazoMeses = 24;
         String invalidDataNascimento = "invalid-date";
 
-        // Act & Assert
         assertThrows(DateTimeParseException.class, () -> {
             simulacaoService.calcularSimulacao(valorEmprestimo, prazoMeses, invalidDataNascimento);
         });
@@ -95,27 +87,21 @@ class SimulacaoServiceImplTest {
 
     @Test
     void testCalcularPMT() {
-        // Arrange
         BigDecimal valorPresente = new BigDecimal("1500.00");
         BigDecimal taxaJuros = new BigDecimal("0.05").divide(BigDecimal.valueOf(12), 6, BigDecimal.ROUND_HALF_UP);
         int numeroParcelas = 24;
 
-        // Act
         BigDecimal pmt = simulacaoService.calcularPMT(valorPresente, taxaJuros, numeroParcelas);
 
-        // Assert
         assertEquals(new BigDecimal("65.8074"), pmt);
     }
 
     @Test
     void testCalcularIdade() {
-        // Arrange
         String dataNascimento = "1990-01-01";
 
-        // Act
         int idade = simulacaoService.calcularIdade(dataNascimento);
 
-        // Assert
         assertEquals(35, idade);
     }
 }
