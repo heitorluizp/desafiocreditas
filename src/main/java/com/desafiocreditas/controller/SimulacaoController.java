@@ -33,9 +33,7 @@ public class SimulacaoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Simulação realizada com sucesso",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = SimulacaoResponseDTO.class))),
-            @ApiResponse(responseCode = "400", description = "Erro de validação nos parâmetros",
-                    content = @Content)
+                            schema = @Schema(implementation = SimulacaoResponseDTO.class)))
     })
     @PostMapping()
     public ResponseEntity<SimulacaoResponseDTO> simularEmprestimo(
