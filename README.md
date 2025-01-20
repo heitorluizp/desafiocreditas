@@ -5,7 +5,7 @@
 ## Visão Geral
 Este projeto é um serviço de simulação de empréstimos construído com Java e Spring Boot. Ele calcula os detalhes do empréstimo com base no valor do empréstimo, prazo em meses e a idade do mutuário.
 ## SWAGGER 
-A documentação da API pode ser acessada em http://localhost:8080/swagger-ui.html
+A documentação da API pode ser acessada em http://localhost:8080/swagger-ui.html ao rodar o serviço localmente
 ## Estrutura JSON de Taxas
 Foi utilizado para a definição da taxa, um json personalizavel, idealmente ele estaria em uma base de dados não relacional e seria consultado no momento da simulação.
 Tal escolha foi feita, para possibilitar que a taxa da simulação seja facilmente modificada sem a necessidade de alterar o código fonte. 
