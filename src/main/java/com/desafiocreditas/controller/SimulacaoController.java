@@ -44,11 +44,12 @@ public class SimulacaoController {
                 simulacaoRequestDTO.getDataNascimento()
         );
 
-        SimulacaoResponseDTO responseDTO = new SimulacaoResponseDTO(
-                simulacao.getValorTotal(),
-                simulacao.getValorParcelas(),
-                simulacao.getTotalJuros()
-        );
+        SimulacaoResponseDTO responseDTO = SimulacaoResponseDTO.builder()
+                .valorTotal(simulacao.getValorTotal())
+                .totalJuros(simulacao.getTotalJuros())
+                .valorParcelas(simulacao.getValorParcelas())
+                .build();
+
 
         return ResponseEntity.ok(responseDTO);
 
